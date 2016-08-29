@@ -98,6 +98,16 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlurkAPI\Entities\Plurk.cs" />
+    <Compile Include="PlurkAPI\Entities\Responses.cs" />
+    <Compile Include="PlurkAPI\Entities\User.cs" />
+    <Compile Include="PlurkAPI\HttpUtil.cs" />
+    <Compile Include="PlurkAPI\IOAuthClient.cs" />
+    <Compile Include="PlurkAPI\OAuthException.cs" />
+    <Compile Include="PlurkAPI\OAuthInstance.cs" />
+    <Compile Include="PlurkAPI\PlurkEnums.cs" />
+    <Compile Include="PlurkAPI\PlurkException.cs" />
+    <Compile Include="PlurkAPI\PlurkHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="PlurkAPI\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
