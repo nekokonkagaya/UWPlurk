@@ -98,22 +98,16 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlurkAPI\Entities\Plurk.cs" />
-    <Compile Include="PlurkAPI\Entities\Responses.cs" />
-    <Compile Include="PlurkAPI\Entities\User.cs" />
-    <Compile Include="PlurkAPI\HttpUtil.cs" />
-    <Compile Include="PlurkAPI\IOAuthClient.cs" />
-    <Compile Include="PlurkAPI\OAuthException.cs" />
-    <Compile Include="PlurkAPI\OAuthInstance.cs" />
-    <Compile Include="PlurkAPI\PlurkEnums.cs" />
-    <Compile Include="PlurkAPI\PlurkException.cs" />
-    <Compile Include="PlurkAPI\PlurkHelper.cs" />
+    <Compile Include="PlurkAPI\OAuthToken.cs" />
+    <Compile Include="PlurkAPI\PlurkOAuth.cs" />
+    <Compile Include="PlurkAPI\PlurkAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="Strings\en-US\Resources.resw" />
     <None Include="UWPlurk_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +132,20 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsDesktop, Version=10.0.10586.0">
+      <Name>Windows Desktop Extensions for the UWP %28WindowsDesktop, Version=10.0.10586.0%29</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsDesktop, Version=10.0.14393.0">
+      <Name>Windows Desktop Extensions for the UWP %28WindowsDesktop, Version=10.0.14393.0%29</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+      <Name>Windows Mobile Extensions for the UWP %28WindowsMobile, Version=10.0.10586.0%29</Name>
+    </SDKReference>
+    <SDKReference Include="WindowsMobile, Version=10.0.14393.0">
+      <Name>Windows Mobile Extensions for the UWP %28WindowsMobile, Version=10.0.14393.0%29</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
