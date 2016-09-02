@@ -7,13 +7,25 @@ using System.Threading.Tasks;
 namespace UWPlurk.PlurkAPI
 {
     /// <summary>
-    /// This class stores OAuth Token.
+    /// This class stores OAuth Token, following standard of plurk API v2.0 use.
     /// </summary>
     public sealed class OAuthToken
     {
         #region "Properties"
-        string content { get; set; }
-        string secret { get; set; }
+        /// <summary>
+        /// Content of token, representing oauth_token.
+        /// </summary>
+        public string content { get; set; }
+
+        /// <summary>
+        /// Secret of token, representing oauth_token_secret.
+        /// </summary>
+        public string secret { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string callbackConfirmed { get; set; }
         #endregion
     }
 }

@@ -98,7 +98,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlurkAPI\HttpUtil.cs" />
     <Compile Include="PlurkAPI\OAuthToken.cs" />
+    <Compile Include="PlurkAPI\OAuth\OAuthUtil.cs" />
     <Compile Include="PlurkAPI\PlurkOAuth.cs" />
     <Compile Include="PlurkAPI\PlurkAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
