@@ -5,16 +5,21 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWPlurk", "UWPlurk\UWPlurk.csproj", "{1BB00047-64CC-466A-AF0E-D7F66C514AFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UWPlurk,API", "UWPlurk,API\UWPlurk,API.csproj", "{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Debug|ARM.ActiveCfg = Debug|ARM
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Debug|ARM.Build.0 = Debug|ARM
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -24,6 +29,7 @@ Global
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Debug|x86.ActiveCfg = Debug|x86
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Debug|x86.Build.0 = Debug|x86
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Debug|x86.Deploy.0 = Debug|x86
+		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Release|Any CPU.ActiveCfg = Release|x86
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Release|ARM.ActiveCfg = Release|ARM
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Release|ARM.Build.0 = Release|ARM
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Release|ARM.Deploy.0 = Release|ARM
@@ -33,6 +39,22 @@ Global
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Release|x86.ActiveCfg = Release|x86
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Release|x86.Build.0 = Release|x86
 		{1BB00047-64CC-466A-AF0E-D7F66C514AFA}.Release|x86.Deploy.0 = Release|x86
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Debug|x64.Build.0 = Debug|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Debug|x86.Build.0 = Debug|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Release|ARM.Build.0 = Release|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Release|x64.ActiveCfg = Release|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Release|x64.Build.0 = Release|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Release|x86.ActiveCfg = Release|Any CPU
+		{A7405C42-36C7-41E3-9F5B-2D9E3B03748E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
