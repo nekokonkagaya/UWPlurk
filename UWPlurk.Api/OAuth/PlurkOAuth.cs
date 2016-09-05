@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using UWPlurk.PlurkAPI.OAuth;
-using Windows.Security.Authentication.Web;
-using Windows.Web.Http;
 
-namespace UWPlurk.PlurkAPI
+namespace UWPlurk.Api.OAuth
 {
     /// <summary>
     /// This class responsible for OAuth requests required for Plurk API v2.0.

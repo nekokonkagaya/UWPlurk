@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UWPlurk.PlurkAPI
+namespace UWPlurk.Api
 {
-    class PlurkAPI
+    /// <summary>
+    /// Contains Helper method 
+    /// </summary>
+    public class HttpUtil
     {
     }
 }

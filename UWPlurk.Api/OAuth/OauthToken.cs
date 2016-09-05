@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UWPlurk.PlurkAPI
+namespace UWPlurk.Api
 {
     /// <summary>
     /// This class stores OAuth Token, following standard of plurk API v2.0 use.

@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UWPlurk.PlurkAPI.OAuth
+namespace UWPlurk.Api.OAuth
 {
     /// <summary>
     /// OAuth Utility class for PLurk OAuth use.
