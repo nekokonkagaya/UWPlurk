@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
+using Windows.Web.Http;
 
 namespace UWPlurk.Api.OAuth
 {
@@ -35,12 +37,6 @@ namespace UWPlurk.Api.OAuth
         #endregion
 
         #region "Constant Fields"
-        private const string baseURL = "http://www.plurk.com";
-
-        private const string requestTokenPath = "/OAuth/request_token";
-        private const string authorizeTokenPath = "/OAuth/authorize";
-        private const string authorizeTokenPathMobile = "/m/authorize"; // For mobile use
-        private const string accessTokenPath = "/OAuth/access_token";
 
         #endregion
 
@@ -54,14 +50,15 @@ namespace UWPlurk.Api.OAuth
         {
             this.appKey = appKey;
             this.appSecret = appSecret;
+            token = new OAuthToken();
 
-            requestTokenURI = new Uri(baseURL + requestTokenPath);
-            authorizeTokenURI = new Uri(baseURL + authorizeTokenPath);
-            accessTokenURI = new Uri(baseURL + accessTokenPath);
+            requestTokenURI = new Uri(Constants.URL_REQUEST_TOKEN);
+            authorizeTokenURI = new Uri(Constants.URL_AUTHORIZE_MOBILEBASE);
+            accessTokenURI = new Uri(Constants.URL_ACCESS_TOKEN);
         }
         #endregion
 
-        #region "Public Methods"
+        #region Public Methods
         /// <summary>
         /// Retrieves a request token from Plurk and stores it in the current OAuthToken.
         /// </summary>
@@ -71,14 +68,14 @@ namespace UWPlurk.Api.OAuth
 
             // Parameters for requesting token
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("oauth_nonce", OAuthUtil.GetNonce());
-            parameters.Add("oauth_consumer_key", appKey);                    // App key of this app
+            parameters.Add("oauth_nonce", OAuthUtil.getNonce());
+            parameters.Add("oauth_consumer_key", appKey);                   // App key of this app
             parameters.Add("oauth_signature_method", "HMAC-SHA1");          // Singnature method accepted by Plurk
-            parameters.Add("oauth_timestamp", OAuthUtil.GetTimeStamp());
+            parameters.Add("oauth_timestamp", OAuthUtil.getTimeStamp());
             parameters.Add("oauth_version", "1.0");                         // Must be 1.0    
 
             // Generate the OAuth signature
-            string signature = OAuthUtil.GetOathSignature(appSecret, token.secret, method, requestTokenURI.ToString(), parameters);
+            string signature = OAuthUtil.getSignature(appSecret, token.secret, method, requestTokenURI.ToString(), parameters);
             parameters.Add("oauth_signature", signature);
 
             parameters.Add("oauth_callback", "oob");                        // Plurk omit this parameter
@@ -91,7 +88,7 @@ namespace UWPlurk.Api.OAuth
 
         #endregion
 
-        #region "Private Methods"
+        #region Private Methods
         private async Task<string> getResponseFromHttpPost(Uri targetUri, Dictionary<string, string> param)
         {
 
@@ -110,5 +107,7 @@ namespace UWPlurk.Api.OAuth
             return "";
         }
         #endregion
+
+        
     }
 }

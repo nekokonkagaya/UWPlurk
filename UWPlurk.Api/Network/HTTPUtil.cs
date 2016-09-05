@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UWPlurk.Api
+namespace UWPlurk.Api.Network
 {
     /// <summary>
     /// Contains Helper method 

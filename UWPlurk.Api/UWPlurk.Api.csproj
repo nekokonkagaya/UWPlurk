@@ -92,11 +92,9 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="HTTPUtil.cs" />
-    <Compile Include="OAuth\OauthToken.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Network\HTTPUtil.cs" />
+    <Compile Include="OAuth\OAuthToken.cs" />
     <Compile Include="OAuth\OAuthUtil.cs" />
     <Compile Include="OAuth\PlurkOAuth.cs" />
     <Compile Include="PlurkAPI.cs" />
@@ -104,12 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

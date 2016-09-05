@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UWPlurk.Api
+namespace UWPlurk.Api.OAuth
 {
     /// <summary>
     /// This class stores OAuth Token, following standard of plurk API v2.0 use.
@@ -23,9 +23,42 @@ namespace UWPlurk.Api
         public string secret { get; set; }
 
         /// <summary>
-        /// 
+        /// State of token.
         /// </summary>
-        public string callbackConfirmed { get; set; }
+        public OAuthTokenType state { get; set; }
         #endregion
+
+        /// <summary>
+        /// Default constructor, create a empty token.
+        /// </summary>
+        public OAuthToken()
+        {
+            content = null;
+            secret = null;
+            state = OAuthTokenType.Empty;
+        }
+
+        /// <summary>
+        /// Create a token with specific data.
+        /// </summary>
+        /// <param name="tokenContent">Token content.</param>
+        /// <param name="TokenSecret">Token Secret.</param>
+        /// <param name="tokenState">State of token.</param>
+        public OAuthToken(string tokenContent, string TokenSecret, OAuthTokenType tokenState)
+        {
+            content = tokenContent;
+            secret = TokenSecret;
+            state = tokenState;
+        }
+    }
+
+    /// <summary>
+    /// Represents the state of an OAuth token.
+    /// </summary>
+    public enum OAuthTokenType
+    {
+        Empty = 0,
+        Temporary,
+        Permanent
     }
 }
