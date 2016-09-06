@@ -22,9 +22,20 @@ namespace UWPlurk
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public static MainPage Current;
+
         public MainPage()
         {
             this.InitializeComponent();
         }
+
+
     }
+
+    public enum NotifyType
+    {
+        StatusMessage,
+        ErrorMessage
+    };
+
 }

@@ -93,7 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Network\HTTPUtil.cs" />
+    <Compile Include="Web\HttpManager.cs" />
     <Compile Include="OAuth\OAuthToken.cs" />
     <Compile Include="OAuth\OAuthUtil.cs" />
     <Compile Include="OAuth\PlurkOAuth.cs" />

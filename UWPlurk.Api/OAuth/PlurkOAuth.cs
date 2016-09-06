@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using UWPlurk.Api.Web;
 using Windows.Web.Http;
+using Windows.Web.Http.Headers;
 
 namespace UWPlurk.Api.OAuth
 {
@@ -12,15 +14,14 @@ namespace UWPlurk.Api.OAuth
     /// </summary>
     public sealed partial class PlurkOAuth
     {
-        #region "Private Regions"
+        #region Private Regions
         Uri requestTokenURI;
-        Uri authorizeTokenURI;
         Uri accessTokenURI;
 
         /// <summary>
         /// Device ID, for same account access on mutilple device.
         /// </summary>
-        private string deviceID { get; set; }
+        private string deviceId { get; set; }
 
         /// <summary>
         /// Name of device accessing API.
@@ -32,15 +33,11 @@ namespace UWPlurk.Api.OAuth
         /// </summary>
         OAuthToken token;
 
-        private string appKey = "";      // fill app key here
-        private string appSecret = "";   // fill app secret here
+        private string appKey = "";      
+        private string appSecret = "";  
         #endregion
 
-        #region "Constant Fields"
-
-        #endregion
-
-        #region "Constructor"
+        #region Constructor
         PlurkOAuth()
         {
             
@@ -53,7 +50,6 @@ namespace UWPlurk.Api.OAuth
             token = new OAuthToken();
 
             requestTokenURI = new Uri(Constants.URL_REQUEST_TOKEN);
-            authorizeTokenURI = new Uri(Constants.URL_AUTHORIZE_MOBILEBASE);
             accessTokenURI = new Uri(Constants.URL_ACCESS_TOKEN);
         }
         #endregion
@@ -62,52 +58,78 @@ namespace UWPlurk.Api.OAuth
         /// <summary>
         /// Retrieves a request token from Plurk and stores it in the current OAuthToken.
         /// </summary>
-        public async void getRequestToken()
+        public async void GetRequestToken()
         {
             string method = "POST";
 
             // Parameters for requesting token
             Dictionary<string, string> parameters = new Dictionary<string, string>();
-            parameters.Add("oauth_nonce", OAuthUtil.getNonce());
+            parameters.Add("oauth_nonce", OAuthUtil.GetNonce());
             parameters.Add("oauth_consumer_key", appKey);                   // App key of this app
             parameters.Add("oauth_signature_method", "HMAC-SHA1");          // Singnature method accepted by Plurk
-            parameters.Add("oauth_timestamp", OAuthUtil.getTimeStamp());
+            parameters.Add("oauth_timestamp", OAuthUtil.GetTimeStamp());
             parameters.Add("oauth_version", "1.0");                         // Must be 1.0    
 
             // Generate the OAuth signature
-            string signature = OAuthUtil.getSignature(appSecret, token.secret, method, requestTokenURI.ToString(), parameters);
+            string signature = OAuthUtil.GetSignature(appSecret, token.secret, method, requestTokenURI.ToString(), parameters);
             parameters.Add("oauth_signature", signature);
 
             parameters.Add("oauth_callback", "oob");                        // Plurk omit this parameter
 
-            // Sent the content 
-            Task<String> waitingRepsonse = getResponseFromHttpPost(requestTokenURI, parameters);
-            string response = await waitingRepsonse;
+            // Prepare HTTP request and sent
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, requestTokenURI);
+            request.Content = new HttpFormUrlEncodedContent(parameters);
+            request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue("application/x-www-form-urlencoded");
+
+            string response = await HttpManager.SendRequestAsync(request);
+
+            token = OAuthUtil.GetTokenFromResponse(response);
+            token.state = OAuthTokenType.Temporary;
         }
 
+        /// <summary>
+        /// Returns the URL to the authorization page.
+        /// Method GetRequestToken() must be called before calling this method.
+        /// </summary>
+        /// <returns></returns>
+        public string getAuthorizeTokenUrl()
+        {
+            return getAuthorizeTokenUrl(this.deviceId, this.model);
+        }
 
+        /// <summary>
+        /// Returns the URL to the authorization page with device ID and model attached for multi login purpose.
+        /// Method GetRequestToken() must be called before calling this method.
+        /// </summary>
+        /// <param name="newDeviceID">Device ID of host machine.</param>
+        /// <param name="newModel">Model name of host machine.</param>
+        /// <returns></returns>
+        public string getAuthorizeTokenUrl(string newDeviceID, string newModel)
+        {
+            StringBuilder sb = new StringBuilder();
+            // Append with token
+            // TODO: Platform specific authorization URL?
+            string authorizeBase = Constants.URL_AUTHORIZE_BASE;
+
+            sb.Append(String.Format("{0}?oauth_token={1}", authorizeBase, token.content) );
+
+            // Append device ID and model for multi login purpose
+            if (!String.IsNullOrEmpty(newDeviceID))
+                sb.Append(String.Format("{0}?deviceid={1}", sb.ToString(), newDeviceID) );
+
+            if (!String.IsNullOrEmpty(newModel)) {
+                newModel = newModel.Replace(' ', '+'); // replace space to '+' as Plurk API suggests 
+                sb.Append(String.Format("{0}?model={1}", sb.ToString(), newModel));
+            }
+
+            return sb.ToString();
+        }
         #endregion
 
         #region Private Methods
-        private async Task<string> getResponseFromHttpPost(Uri targetUri, Dictionary<string, string> param)
-        {
 
-            HttpClient httpclient = new HttpClient();
-            HttpFormUrlEncodedContent formcontent = new HttpFormUrlEncodedContent(param);
-
-            try
-            {
-                HttpResponseMessage response = await httpclient.PostAsync(targetUri, formcontent);
-            }
-            catch (Exception ex)
-            {
-
-            }
-           
-            return "";
-        }
         #endregion
 
-        
+
     }
 }
