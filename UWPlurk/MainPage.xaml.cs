@@ -29,7 +29,11 @@ namespace UWPlurk
             this.InitializeComponent();
         }
 
-
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            // DEBUG Function, navigate to test page
+            this.Frame.Navigate(typeof(TestOAuthPage));
+        }
     }
 
     public enum NotifyType
