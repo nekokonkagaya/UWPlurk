@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Web.Http;
 
-namespace UWPlurk.Api.Web
+namespace UWPlurk.Api.Http
 {
     /// <summary>
     /// Manager class holding http client to perform all http requests. 
@@ -77,18 +77,21 @@ namespace UWPlurk.Api.Web
         /// <returns>HTTP Response in string format.</returns>
         public async static Task<string> SendRequestAsync(HttpRequestMessage request)
         {
+            HttpResponseMessage response;
+
             try
             {
-                HttpResponseMessage response = await httpClient.SendRequestAsync(request);
+                response = await httpClient.SendRequestAsync(request);
                 response.EnsureSuccessStatusCode();
 
-                return await response.Content.ReadAsStringAsync();
+                string responseTxt = await response.Content.ReadAsStringAsync();
+                return responseTxt;
             }
             catch (Exception ex)
             {
                 // Debug coding
-                string response =  "Error:" + ex.HResult.ToString("X") + " Exception: " + ex.Message;
-                return response;
+                string responseTxt =  "Error:" + ex.HResult.ToString("X") + " Exception: " + ex.Message;
+                return responseTxt;
             }
         }
     }

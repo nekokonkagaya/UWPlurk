@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using UWPlurk.Api.Web;
+using UWPlurk.Api.Http;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
 
@@ -82,13 +82,13 @@ namespace UWPlurk.Api.OAuth
             string signature = OAuthUtil.GetSignature(appSecret, token.secret, method, requestTokenURI.ToString(), parameters);
             parameters.Add("oauth_signature", signature);
 
-            parameters.Add("oauth_callback", "oob");                        // Plurk omit this parameter
+            //parameters.Add("oauth_callback", "oob");                        // Plurk omit this parameter
 
             // Prepare HTTP request and sent
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, requestTokenURI);
 
             // Possible paramter for authorization?
-            StringBuilder sb = new StringBuilder("OAuth realm=\""+ requestTokenURI.ToString() + "\"");
+            StringBuilder sb = new StringBuilder("OAuth realm=\"\"");
             foreach(KeyValuePair<string, string> content in parameters)
             {
                 if (content.Key.StartsWith("oauth_"))
