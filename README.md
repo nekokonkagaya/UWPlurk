@@ -7,7 +7,7 @@ UWPlurk has two subprojects, include:
 
 1. UWPlurk - UWP plurk client responsible for layout and corresponsible logic, including desktop and phone version.
 
-2. UWPlurk.Api - Implements [Plurk API v2.0] (http://www.plurk.com/API/2) library for UWPlurk (or others, supposed) application.
+2. UWPlurk.Api - Implements C# Universal Window based [Plurk API v2.0] (http://www.plurk.com/API/2) library for UWPlurk application (or others, supposed).
 
 # Dependencies
 * [Json.NET] (http://www.newtonsoft.com/json), with v9.0.1+ used.
