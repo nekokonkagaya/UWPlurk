@@ -21,11 +21,6 @@ namespace UWPlurk.Api.OAuth
         /// Secret of token, representing oauth_token_secret.
         /// </summary>
         public string secret { get; set; }
-
-        /// <summary>
-        /// State of token.
-        /// </summary>
-        public OAuthTokenType state { get; set; }
         #endregion
 
         /// <summary>
@@ -35,7 +30,6 @@ namespace UWPlurk.Api.OAuth
         {
             content = null;
             secret = null;
-            state = OAuthTokenType.Empty;
         }
 
         /// <summary>
@@ -43,22 +37,11 @@ namespace UWPlurk.Api.OAuth
         /// </summary>
         /// <param name="tokenContent">Token content.</param>
         /// <param name="TokenSecret">Token Secret.</param>
-        /// <param name="tokenState">State of token.</param>
-        public OAuthToken(string tokenContent, string TokenSecret, OAuthTokenType tokenState)
+        public OAuthToken(string tokenContent, string TokenSecret)
         {
             content = tokenContent;
             secret = TokenSecret;
-            state = tokenState;
         }
     }
 
-    /// <summary>
-    /// Represents the state of an OAuth token.
-    /// </summary>
-    public enum OAuthTokenType
-    {
-        Empty = 0,
-        Temporary,
-        Permanent
-    }
 }

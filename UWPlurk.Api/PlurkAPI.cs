@@ -20,7 +20,7 @@ namespace UWPlurk.Api
         }
 
         public PlurkAPI(string appKey, string appSecret, string tokenContent, string tokenSecret) 
-            : base(appKey, appSecret, tokenContent, tokenSecret, OAuthTokenType.Empty)
+            : base(appKey, appSecret, tokenContent, tokenSecret)
         {
 
         }

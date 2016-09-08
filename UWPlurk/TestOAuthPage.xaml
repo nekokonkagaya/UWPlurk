@@ -8,22 +8,23 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="AppKeyBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="AppKey" VerticalAlignment="Top" Height="32" Width="51"/>
-        <TextBox x:Name="AppKey" HorizontalAlignment="Left" Margin="90,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.761,0.542" Width="260" Height="27"/>
-        <TextBlock x:Name="AppSecretBlock" HorizontalAlignment="Left" Margin="10,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="75" SelectionChanged="AppSecretBlock_SelectionChanged">
-            <Run Text="AppSecret"/>
-            <LineBreak/>
-            <Run/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="AppKeyBlock" HorizontalAlignment="Left" Margin="10,102,0,0" TextWrapping="Wrap" Text="AppKey" VerticalAlignment="Top" Height="32" Width="51" Style="{StaticResource BodyTextBlockStyle}"/>
+        <TextBox x:Name="AppKey" HorizontalAlignment="Left" Margin="90,102,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.761,0.542" Width="429" Height="32"/>
+        <TextBlock x:Name="AppSecretBlock" HorizontalAlignment="Left" Margin="10,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="75" SelectionChanged="AppSecretBlock_SelectionChanged" Text="AppSecret"/>
+        <TextBox x:Name="AppSecret" HorizontalAlignment="Left" Margin="90,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.761,0.542" Width="429" Height="32" TextChanged="AppSecret_TextChanged"/>
+        <TextBlock x:Name="TokenBlock" HorizontalAlignment="Left" Margin="10,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="75" SelectionChanged="AppSecretBlock_SelectionChanged" Text="Token"/>
+        <TextBlock x:Name="TokenSecretBlock" HorizontalAlignment="Left" Margin="10,222,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="112" SelectionChanged="AppSecretBlock_SelectionChanged" Text="Token Secret"/>
+        <TextBox x:Name="TokenSecret" HorizontalAlignment="Left" Margin="122,222,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="397" TextChanged="TokenSecret_TextChanged" Height="32"/>
+        <TextBox x:Name="TokenContent" HorizontalAlignment="Left" Margin="122,190,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="397" TextChanged="TokenContent_TextChanged" Height="32"/>
+        <TextBlock x:Name="Title" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="60" Width="478" Style="{StaticResource HeaderTextBlockStyle}">
+            <Run Text="OAuth Testing Console"/>
         </TextBlock>
-        <TextBox x:Name="AppSecret" HorizontalAlignment="Left" Margin="90,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.761,0.542" Width="260" Height="27" TextChanged="AppSecret_TextChanged"/>
-        <TextBlock x:Name="TokenBlock" HorizontalAlignment="Left" Margin="10,94,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="75" SelectionChanged="AppSecretBlock_SelectionChanged" Text="Token"/>
-        <TextBlock x:Name="TokenSecretBlock" HorizontalAlignment="Left" Margin="10,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="32" Width="112" SelectionChanged="AppSecretBlock_SelectionChanged">
-            <Run Text="Token"/>
-            <Run Text=" secret"/>
-        </TextBlock>
-        <TextBox x:Name="TokenSecret" HorizontalAlignment="Left" Margin="122,126,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="228"/>
-        <TextBox x:Name="TokenContent" HorizontalAlignment="Left" Margin="122,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="228"/>
-        <Button x:Name="ButtonRequestToken" Content="Request Token" HorizontalAlignment="Left" Margin="223,163,0,0" VerticalAlignment="Top" Width="127" Click="ButtonRequestToken_Click"/>
+        <Button x:Name="ButtonRequestToken" Content="Request Token" HorizontalAlignment="Left" Margin="539,102,0,0" VerticalAlignment="Top" Width="127" Click="ButtonRequestToken_Click" Height="33"/>
+        <Button x:Name="AccessTokenbutton" Content="AccessToken" Click="AccessTokenbutton_Click" Margin="539,140,0,467" HorizontalAlignment="Left" VerticalAlignment="Top" Width="127"/>
 
     </Grid>
 </Page>

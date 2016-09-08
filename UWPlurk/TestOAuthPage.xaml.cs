@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using UWPlurk.Api;
 using UWPlurk.Api.OAuth;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Security.Authentication.Web;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,7 +27,6 @@ namespace UWPlurk
     /// </summary>
     public sealed partial class TestOAuthPage : Page
     {
-
         public TestOAuthPage()
         {
             this.InitializeComponent();
@@ -75,6 +76,29 @@ namespace UWPlurk
                 TokenContent.Text = !String.IsNullOrEmpty(token.content) ? token.content : "";
                 TokenSecret.Text = !String.IsNullOrEmpty(token.secret) ? token.secret : "";
             }
+
+        }
+
+        private void AccessTokenbutton_Click(object sender, RoutedEventArgs e)
+        {
+            /*
+            if (!String.IsNullOrEmpty(TokenContent.Text) && !String.IsNullOrEmpty(TokenSecret.Text))
+            {
+                //string verificationUrl = PlurkAPI
+                PlurkAPI plurkApi = new PlurkAPI(AppKey.Text, AppSecret.Text, TokenContent.Text, TokenSecret.Text);
+                string authericateUrl = plurkApi.GetAuthorizeTokenUrl();
+                
+            }
+            */
+        }
+
+        private void TokenContent_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TokenSecret_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
         }
     }
