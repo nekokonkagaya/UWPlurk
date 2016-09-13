@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Entities\Plurk.cs" />
     <Compile Include="OAuth\OAuthToken.cs" />
     <Compile Include="OAuth\OAuthUtil.cs" />
     <Compile Include="OAuth\PlurkOAuth.cs" />
