@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace UWPlurk.Api.Entities
 {
     /// <summary>
-    /// 
+    /// Representing plurk entries data structure.
     /// </summary>
     public class Plurk
     {
@@ -80,9 +80,20 @@ namespace UWPlurk.Api.Entities
         /// The raw content as user entered it, useful when editing plurks or if you want to format the content differently. 
         /// </summary>
         public string content_raw { get; set; }
+
+        /// <summary>
+        /// The formatted content, emoticons and images will be turned into IMG tags etc.
+        /// </summary>
         public string content { get; set; }
+
+        /// <summary>
+        /// The date this plurk was posted.
+        /// </summary>
         public DateTime posted { get; set; }
 
+        /// <summary>
+        /// Number of users who liked given plurk. 
+        /// </summary>
         public int favorite_count { get; set; }
 
         /// <summary>
@@ -99,5 +110,47 @@ namespace UWPlurk.Api.Entities
         /// True if plurk can be replurked. 
         /// </summary>
         public bool replurkable { get; set; }
+
+        /// <summary>
+        /// True if plurk has been replurked by current user. 
+        /// </summary>
+        public bool replurked { get; set; }
+
+        /// <summary>
+        /// ID of a user who has replurked given plurk to current user's timeline. 
+        /// </summary>
+        public string replurker_id { get; set; }
+
+        /// <summary>
+        /// Number of users who replurked given plurk. 
+        /// </summary>
+        public long replurkers_count { get; set; }
+
+        /// <summary>
+        /// List of ids of users who replurked given plurk (can be truncated). 
+        /// </summary>
+        public long[] replurkers { get; set; }
+
+        /// <summary>
+        /// Get Plurk URL of the instances.
+        /// </summary>
+        /// <returns>Normalized plurk URL.</returns>
+        public string GetPlurkUrl()
+        {
+            return string.Format("http://www.plurk.com/p/{0}", Base36.Encode(plurk_id));
+        }
+
+        /// <summary>
+        /// String representation of plurk.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return string.Format("[{0:yyyy/MM/dd HH:mm:ss}] {1} {2}: {3}",
+                posted,
+                user_id,
+                qualifier ?? qualifier_translated,
+                content_raw);
+        }
     }
 }
