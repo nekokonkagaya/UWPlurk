@@ -43,7 +43,7 @@ namespace UWPlurk.Api
         #endregion
 
         #region Users
-        public const string APP_USERS = APP_URL_BASE + "/Users";
+        public const string APP_USERS = "/Users";
 
         public const string APP_USERS_ME = APP_USERS + "/me";
 
@@ -55,7 +55,7 @@ namespace UWPlurk.Api
         #endregion
 
         #region Profile
-        public const string APP_PROFILE = APP_URL_BASE + "/Profile";
+        public const string APP_PROFILE = "/Profile";
 
         public const string APP_PROFILE_GETOWNPROFILE = APP_PROFILE + "/getOwnProfile";
 
@@ -63,11 +63,11 @@ namespace UWPlurk.Api
         #endregion
 
         #region Real time notifications
-        public const string APP_REALTIME_GETUSERCHANNEL = APP_URL_BASE + "/Realtime/getUserChannel";
+        public const string APP_REALTIME_GETUSERCHANNEL = "/Realtime/getUserChannel";
         #endregion
 
         #region Polling
-        public const string APP_POLLING = APP_URL_BASE + "/Polling";
+        public const string APP_POLLING = "/Polling";
 
         public const string APP_POLLING_GETPLURKS = APP_POLLING + "/getPlurks";
 
@@ -75,7 +75,7 @@ namespace UWPlurk.Api
         #endregion
 
         #region Timeline
-        public const string APP_TIMELINE = APP_URL_BASE + "/Timeline";
+        public const string APP_TIMELINE = "/Timeline";
 
         public const string APP_TIMELINE_GETPLURK = APP_TIMELINE + "/getPlurk";
 
