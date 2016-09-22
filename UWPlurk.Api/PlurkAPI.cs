@@ -8,7 +8,7 @@ using UWPlurk.Api.OAuth;
 namespace UWPlurk.Api
 {
     /// <summary>
-    /// Plurk API manager class
+    /// Plurk API manager class.
     /// </summary>
     public class PlurkAPI : PlurkOAuth
     {
