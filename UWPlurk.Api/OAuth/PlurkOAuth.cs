@@ -21,14 +21,14 @@ namespace UWPlurk.Api.OAuth
         private string deviceId { get; set; }
 
         /// <summary>
-        /// Name of device accessing API.
+        /// Device Name.
         /// </summary>
         private string model { get; set; }
 
         /// <summary>
         /// OAuth Token for plurk API use.
         /// </summary>
-        public OAuthToken token;
+        public OAuthToken Token;
 
         private string appKey = "";      
         private string appSecret = "";  
@@ -44,14 +44,14 @@ namespace UWPlurk.Api.OAuth
         {
             this.appKey = appKey;
             this.appSecret = appSecret;
-            token = new OAuthToken();
+            Token = new OAuthToken();
         }
 
         public PlurkOAuth(string appKey = "", string appSecret = "", string tokenContent = "", string tokenSecret = "") 
             : this(appKey, appSecret)
         {
-            token.content = tokenContent;
-            token.secret = tokenSecret;
+            Token.content = tokenContent;
+            Token.secret = tokenSecret;
         }
         #endregion
 
@@ -71,9 +71,9 @@ namespace UWPlurk.Api.OAuth
             // Send Http request and get response
             string response = await HttpManager.SendRequestAsync(request);
             
-            token = OAuthUtil.GetTokenFromResponse(response);
+            Token = OAuthUtil.GetTokenFromResponse(response);
 
-            return token;
+            return Token;
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace UWPlurk.Api.OAuth
             // TODO: Platform specific authorization URL?
             string authorizeBase = Constants.URL_AUTHORIZE_BASE;
 
-            sb.Append(String.Format("{0}?oauth_token={1}", authorizeBase, token.content) );
+            sb.Append(String.Format("{0}?oauth_token={1}", authorizeBase, Token.content) );
 
             // Append device ID and model for multi login purpose
             if (!String.IsNullOrEmpty(newDeviceID))
@@ -118,16 +118,16 @@ namespace UWPlurk.Api.OAuth
         {
             // Parameters for requesting token
             Dictionary<string, string> param = new Dictionary<string, string>();
-            param.Add("oauth_token", token.content);
+            param.Add("oauth_token", Token.content);
             param.Add("oauth_verifier", verifier);
 
             // Prepare HTTP request and sent
             HttpRequestMessage request = createRequestMessage(Constants.URL_ACCESS_TOKEN, "POST", param);
             // Send Http request and get response
             string response = await HttpManager.SendRequestAsync(request);
-            token = OAuthUtil.GetTokenFromResponse(response);
+            Token = OAuthUtil.GetTokenFromResponse(response);
 
-            return token;
+            return Token;
         }
         #endregion
 
@@ -166,7 +166,7 @@ namespace UWPlurk.Api.OAuth
             param.Add("oauth_version", "1.0");                         // Must be 1.0    
 
             // Generate the OAuth signature
-            string signature = OAuthUtil.GetSignature(appSecret, token.secret, method, url, param);
+            string signature = OAuthUtil.GetSignature(appSecret, Token.secret, method, url, param);
             param.Add("oauth_signature", signature);
 
             // Build up authorization Header
@@ -182,13 +182,45 @@ namespace UWPlurk.Api.OAuth
             request.Headers.Add("Authorization", authorization);
 
             request.Content = new HttpFormUrlEncodedContent(param);
+            // TODO: change header type if upload file request is processed?
             request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue("application/x-www-form-urlencoded");
 
             return request;
         }
-
         #endregion
 
+        #region Protected Methods
+        /// <summary>
+        /// Send API request to specific URL with provided HTTP method, token or with arguments. 
+        /// </summary>
+        /// <param name="apiPath">Relative path of target API.</param>
+        /// <param name="method">HTTP methods, if forms of POST/GET/PUT.</param>
+        /// <param name="args">Additional arguments. Prefix with 'oauth' is not accepted.</param>
+        /// <returns>String response of API call.</returns>
+        protected async Task<string> SendRequest(string apiPath, string method, Dictionary<string, string> args)
+        {
+            Dictionary<string, string> param = new Dictionary<string, string> { { "oauth_token", Token.content } };
+            string response = "";
 
+
+            if (null != args)
+            {
+                foreach (KeyValuePair<string, string> content in args)
+                {
+                    // filter out "oauth_" params
+                    if (!content.Key.StartsWith("oauth_"))
+                    {
+                        param.Add(content.Key, content.Value);
+                    }
+                }
+            }
+
+            // Prepare HTTP request and sent
+            HttpRequestMessage request = createRequestMessage(Constants.APP_URL_BASE + apiPath, method, param);
+            response = await HttpManager.SendRequestAsync(request);
+
+            return response;
+        }
+        #endregion
     }
 }

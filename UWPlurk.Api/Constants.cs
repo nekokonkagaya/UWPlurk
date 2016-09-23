@@ -131,5 +131,10 @@ namespace UWPlurk.Api
 
         public const string APP_FRIENDSFANS_GETFOLLOWINGBYOFFSET = APP_FRIENDSFANS + "/getFollowingByOffset";
         #endregion
+
+        /// <summary>
+        /// URL prefix for custom emoticons.
+        /// </summary>
+        public const string EMO_URL_PREFIX = "https://emos.plurk.com";
     }
 }
