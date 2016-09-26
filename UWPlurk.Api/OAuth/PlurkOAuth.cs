@@ -194,7 +194,7 @@ namespace UWPlurk.Api.OAuth
         /// Send API request to specific URL with provided HTTP method, token or with arguments. 
         /// </summary>
         /// <param name="apiPath">Relative path of target API.</param>
-        /// <param name="method">HTTP methods, if forms of POST/GET/PUT.</param>
+        /// <param name="method">HTTP methods, in forms of POST/GET/PUT.</param>
         /// <param name="args">Additional arguments. Prefix with 'oauth' is not accepted.</param>
         /// <returns>String response of API call.</returns>
         protected async Task<string> SendRequest(string apiPath, string method, Dictionary<string, string> args)
