@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Media;
 
-namespace UWPlurk.Components
+namespace UWPlurk.Core
 {
     public static class PlurkAuthericationBroker
     {

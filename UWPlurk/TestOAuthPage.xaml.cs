@@ -69,7 +69,8 @@ namespace UWPlurk
 
             // Create a testApi object for retrieve Request Token
             PlurkAPI plurkApi = new PlurkAPI(AppKey.Text, AppSecret.Text);
-            OAuthToken token = await plurkApi.GetRequestToken();
+            await plurkApi.GetRequestToken();
+            OAuthToken token = plurkApi.Token;
 
             if (token != null)
             {

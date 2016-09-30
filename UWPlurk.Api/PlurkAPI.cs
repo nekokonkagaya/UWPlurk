@@ -120,6 +120,12 @@ namespace UWPlurk.Api
         #endregion
 
         #region Private Methods
+        /// <summary>
+        /// Convert JSON String to instance object.
+        /// </summary>
+        /// <typeparam name="T">Class instance to convert.</typeparam>
+        /// <param name="jsonString">JSON raw string.</param>
+        /// <returns></returns>
         private T CreateEntity<T>(string jsonString)
         {
             return JsonConvert.DeserializeObject<T>(jsonString);
