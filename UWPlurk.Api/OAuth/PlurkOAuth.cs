@@ -140,7 +140,7 @@ namespace UWPlurk.Api.OAuth
         /// <param name="param">OAuth parameters.</param>
         /// <param name="fileUpload">Indicate is file upload request or not.</param>
         /// <returns>The created HttpRequestMessage.</returns>
-        private HttpRequestMessage createRequestMessage(string url, string method, Dictionary<string, string> param, bool fileUpload)
+        private HttpRequestMessage createRequestMessage(string url, string method, Dictionary<string, string> param)
         {
             HttpRequestMessage request;
             Uri targetUri = new Uri(url);
@@ -183,30 +183,10 @@ namespace UWPlurk.Api.OAuth
             request.Headers.Add("Authorization", authorization);
 
             request.Content = new HttpFormUrlEncodedContent(param);
+            request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue("application/x-www-form-urlencoded");
 
-            if (fileUpload)
-            {
-                request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue("multipart/form-data");
-                request.Headers.Add("Expect", "100 -continue");
-            }
-            else
-            {
-                request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue("application/x-www-form-urlencoded");
-            }
 
             return request;
-        }
-
-        /// <summary>
-        /// Create HTTP Request object with specified OAuth parameters and URL (without upload).
-        /// </summary>
-        /// <param name="url">Target URL of request.</param>
-        /// <param name="method">HTTP request Method, accept POST/GET/PUT.</param>
-        /// <param name="param">OAuth parameters.</param>
-        /// <returns>The created HttpRequestMessage.</returns>
-        private HttpRequestMessage createRequestMessage(string url, string method, Dictionary<string, string> param)
-        {
-            return createRequestMessage(url, method, param, false);
         }
         #endregion
 
@@ -240,6 +220,12 @@ namespace UWPlurk.Api.OAuth
             HttpRequestMessage request = createRequestMessage(Constants.APP_URL_BASE + apiPath, method, param);
             response = await HttpManager.SendRequestAsync(request);
 
+            return response;
+        }
+
+        protected async Task<string> SendMultiPartRequest(string apiPath, string method, Dictionary<string, string> args)
+        {
+            var response = "";
             return response;
         }
         #endregion
