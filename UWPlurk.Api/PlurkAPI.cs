@@ -18,7 +18,7 @@ namespace UWPlurk.Api
         /// <summary>
         /// Default HTTP Method
         /// </summary>
-        private string defaultHttpMethod = "POST";
+        private string _HttpMethod = "POST";
         #endregion
 
         #region Constructor
@@ -42,7 +42,7 @@ namespace UWPlurk.Api
         /// <returns></returns>
         public async Task<User> Me()
         {
-            string response = await SendRequest(Constants.APP_USERS + "/me", "POST", null);
+            string response = await SendRequest(Constants.APP_USERS + "/me", _HttpMethod, null);
             return CreateEntity<User>(response);
 
         }
@@ -80,7 +80,7 @@ namespace UWPlurk.Api
                 param.Add("date_of_birth", formatDate);
             }
 
-            string response = await SendRequest(Constants.APP_USERS + "/update", "POST", param);
+            string response = await SendRequest(Constants.APP_USERS + "/update", _HttpMethod, param);
             return CreateEntity<User>(response);
         }
 
@@ -97,7 +97,7 @@ namespace UWPlurk.Api
             if (!String.IsNullOrEmpty(profile_image))
             {
                 Dictionary<string, string> param = new Dictionary<string, string> { { "profile_image", profile_image } };
-                string response = await SendRequest(Constants.APP_USERS + "/updatePicture", "POST", param);
+                string response = await SendRequest(Constants.APP_USERS + "/updatePicture", _HttpMethod, param);
                 result = CreateEntity<User>(response);
             }
 
@@ -111,12 +111,34 @@ namespace UWPlurk.Api
         /// <returns></returns>
         public async Task<KarmaStats> GetKarmaStats()
         {
-            string response = await SendRequest(Constants.APP_USERS + "/getKarmaStats", "POST", null);
+            string response = await SendRequest(Constants.APP_USERS + "/getKarmaStats", _HttpMethod, null);
             return CreateEntity<KarmaStats>(response);
         }
         #endregion
 
         #region Profile
+        /// <summary>
+        /// Returns data that's private for the current user. 
+        /// This can be used to construct a profile and render a timeline of the latest plurks. 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<User> getOwnProfile()
+        {
+            string response = await SendRequest(Constants.APP_PROFILE + "/getOwnProfile", _HttpMethod, null);
+            return CreateEntity<User>(response);
+        }
+
+        /// <summary>
+        /// Fetches public information such as a user's public plurks and basic information. 
+        /// Fetches also if the current user is following the user, are friends with or is a fan. 
+        /// </summary>
+        /// <param name="user_id">The user_id of the public profile. Can be integer (like 34) or nick name (like amix).</param>
+        /// <returns></returns>
+        public async Task<User> getPublicProfile(string user_id)
+        {
+            string response = await SendRequest(Constants.APP_PROFILE + "/getPublicProfile", _HttpMethod, null);
+            return CreateEntity<User>(response);
+        }
         #endregion
 
         #region Private Methods
