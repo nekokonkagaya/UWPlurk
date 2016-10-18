@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using UWPlurk.Api.Http;
+using Windows.Storage;
 using Windows.Web.Http;
 using Windows.Web.Http.Headers;
 
@@ -138,9 +140,9 @@ namespace UWPlurk.Api.OAuth
         /// <param name="url">Target URL of request.</param>
         /// <param name="method">HTTP request Method, accept POST/GET/PUT.</param>
         /// <param name="param">OAuth parameters.</param>
-        /// <param name="multipart">Indicate this request is "multipart/form-data".</param>
+        /// <param name="uploadFile">File to be uploaded in this request, any not null content will indicate this request is "multipart/form-data".</param>
         /// <returns>The created HttpRequestMessage.</returns>
-        private HttpRequestMessage createRequestMessage(string url, string method, Dictionary<string, string> param, bool multipart = false)
+        private HttpRequestMessage createRequestMessage(string url, string method, Dictionary<string, string> param, StorageFile uploadFile = null, string fileParam = null)
         {
             HttpRequestMessage request;
             Uri targetUri = new Uri(url);
@@ -181,10 +183,25 @@ namespace UWPlurk.Api.OAuth
             }
             string authorization = sb.ToString();
             request.Headers.Add("Authorization", authorization);
-            
-            request.Content = new HttpFormUrlEncodedContent(param);
-            request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue("application/x-www-form-urlencoded");
+            var formContent = new HttpFormUrlEncodedContent(param);
 
+            if (null != uploadFile)
+            {
+                var multipartContent = new HttpMultipartFormDataContent();
+                multipartContent.Add(formContent);
+
+                // TODO: Need to convert Storage file to http stream content
+                
+
+                request.Content = multipartContent;
+                request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue(String.Format("multipart/form-data; boundary=---------{0}", Guid.NewGuid()));
+
+            }
+            else
+            {
+                request.Content = formContent;
+                request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue("application/x-www-form-urlencoded");
+            }
             return request;
         }
         #endregion
