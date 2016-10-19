@@ -142,7 +142,7 @@ namespace UWPlurk.Api.OAuth
         /// <param name="param">OAuth parameters.</param>
         /// <param name="uploadFile">File to be uploaded in this request, any not null content will indicate this request is "multipart/form-data".</param>
         /// <returns>The created HttpRequestMessage.</returns>
-        private HttpRequestMessage createRequestMessage(string url, string method, Dictionary<string, string> param, StorageFile uploadFile = null, string fileParam = null)
+        private HttpRequestMessage createRequestMessage(string url, string method, Dictionary<string, string> param, FileStream uploadFile = null, string fileParam = null, string fileName = null)
         {
             HttpRequestMessage request;
             Uri targetUri = new Uri(url);
@@ -190,8 +190,9 @@ namespace UWPlurk.Api.OAuth
                 var multipartContent = new HttpMultipartFormDataContent();
                 multipartContent.Add(formContent);
 
-                // TODO: Need to convert Storage file to http stream content
-                
+                // Add file content for upload
+                multipartContent.Add(new HttpStreamContent(uploadFile.AsInputStream()), fileParam, fileName);
+
 
                 request.Content = multipartContent;
                 request.Content.Headers.ContentType = new HttpMediaTypeHeaderValue(String.Format("multipart/form-data; boundary=---------{0}", Guid.NewGuid()));
