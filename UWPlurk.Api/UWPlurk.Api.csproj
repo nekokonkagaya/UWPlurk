@@ -108,7 +108,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base36.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Entities\ConciseUser.cs" />
     <Compile Include="Entities\Emoticons.cs" />
@@ -128,6 +127,7 @@
     <Compile Include="OAuth\OAuthUtil.cs" />
     <Compile Include="OAuth\PlurkOAuth.cs" />
     <Compile Include="PlurkAPI.cs" />
+    <Compile Include="PlurkAPIInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Http\HttpManager.cs" />
     <EmbeddedResource Include="Properties\UWPlurk.Api.rd.xml" />

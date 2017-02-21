@@ -13,8 +13,9 @@ namespace UWPlurk.Api
     {
         /// <summary>
         /// Base URL of Plurk.
+        /// Change to use HTTPS base on the notice of https://www.plurk.com/p/m3l7qh
         /// </summary>
-        public const string URL_BASE = "http://www.plurk.com";
+        public const string URL_BASE = "https://www.plurk.com";
 
         public const string APP_URL_BASE = URL_BASE + "/APP";
 

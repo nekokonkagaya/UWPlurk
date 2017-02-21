@@ -24,6 +24,9 @@ namespace UWPlurk
     /// </summary>
     sealed partial class App : Application
     {
+
+        public static PlurkAPI PlurkAPI = new PlurkAPI("", "");
+
         /// <summary>
         /// 初始化單一應用程式物件。這是第一行執行之撰寫程式碼，
         /// 而且其邏輯相當於 main() 或 WinMain()。

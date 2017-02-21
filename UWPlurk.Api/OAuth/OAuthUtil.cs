@@ -83,7 +83,6 @@ namespace UWPlurk.Api.OAuth
 
             var signature = CryptographicBuffer.EncodeToBase64String(signatureBuffer);
             return signature;
-            //return Convert.ToBase64String(result);
         }
 
         /// <summary>
