@@ -20,12 +20,12 @@ namespace UWPlurk.Api.OAuth
         /// <summary>
         /// Device ID, for same account access on mutilple device.
         /// </summary>
-        private string deviceId { get; set; }
+        private string DeviceId { get; set; }
 
         /// <summary>
         /// Device Name.
         /// </summary>
-        private string model { get; set; }
+        private string Model { get; set; }
 
         /// <summary>
         /// OAuth Token for plurk API use.
@@ -85,7 +85,7 @@ namespace UWPlurk.Api.OAuth
         /// <returns></returns>
         public string GetAuthorizeTokenUrl()
         {
-            return GetAuthorizeTokenUrl(this.deviceId, this.model);
+            return GetAuthorizeTokenUrl(this.DeviceId, this.Model);
         }
 
         /// <summary>
