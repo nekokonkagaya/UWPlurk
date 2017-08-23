@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,130 +15,159 @@ namespace UWPlurk.Api.Entities
         /// <summary>
         /// The unique user id.
         /// </summary>
-        public long id { get; set; }
+        [JsonProperty("id")]
+        public long Id { get; set; }
 
         /// <summary>
         /// The unique nick_name of the user, for example amix.
         /// </summary>
-        public string nick_name { get; set; }
+        [JsonProperty("nick_name")]
+        public string NickName { get; set; }
 
         /// <summary>
         /// The non-unique display name of the user, for example Amir S. Only set if it's non empty.
         /// </summary>
-        public string display_name { get; set; }
+        [JsonProperty("display_name")]
+        public string DisplayName { get; set; }
 
         /// <summary>
         /// The user's full name, like Amir Salihefendic.
         /// </summary>
-        public string full_name { get; set; }
+        [JsonProperty("full_name")]
+        public string FullName { get; set; }
 
         /// <summary>
         /// The user's birthday.
         /// </summary>
-        public DateTime? date_of_birth { get; set; }
+        [JsonProperty("date_of_birth")]
+        public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
         /// 1 is male, 0 is female, 2 is not stating/other.
         /// </summary>
-        public enum plurk_sex { female = 0, male = 1, others = 2 }
-        public plurk_sex gender { get; set; }
+        public enum PlurkSex { female = 0, male = 1, others = 2 }
+        [JsonProperty("gender")]
+        public PlurkSex Gender { get; set; }
 
         /// <summary>
         /// Can be not_saying, single, married, divorced, engaged, in_relationship, complicated, widowed, open_relationship
         /// </summary>
-        public string relationship { get; set; }
+        [JsonProperty("relationship")]
+        public string Relationship { get; set; }
 
         /// <summary>
         /// The user's location, a text string, for example Aarhus Denmark.
         /// </summary>
-        public string location { get; set; }
+        [JsonProperty("location")]
+        public string Location { get; set; }
 
         /// <summary>
         /// The profile title of the user.
         /// </summary>
-        public string page_title { get; set; }
+        [JsonProperty("page_title")]
+        public string PageTitle { get; set; }
 
         /// <summary>
         /// User's karma value.
         /// </summary>
-        public Single karma { get; set; }
+        [JsonProperty("karma")]
+        public Single Karma { get; set; }
 
         /// <summary>
         /// Specifies what the latest avatar (profile picture) version is.
         /// </summary>
-        public int? avatar { get; set; }
+        [JsonProperty("avatar")]
+        public int? Avatar { get; set; }
 
         /// <summary>
         /// How many friends has the user recruited.
         /// </summary>
-        public int recruited { get; set; }
+        [JsonProperty("recruited")]
+        public int Recruited { get; set; }
 
         /// <summary>
         /// If 1 then the user has a profile picture, otherwise the user should use the default.
         /// </summary>
-        public int? has_profile_image { get; set; }
+        [JsonProperty("has_profile_image")]
+        public int? HasProfileImage { get; set; }
 
-        public int? profile_views { get; set; }
-        public bool settings { get; set; }
-        public bool is_premium { get; set; }
+        [JsonProperty("profile_views")]
+        public int? ProfileViews { get; set; }
+        [JsonProperty("settings")]
+        public bool Settings { get; set; }
+        [JsonProperty("is_premium")]
+        public bool IsPremium { get; set; }
 
         /// <summary>
         /// Plurk Coin (Premium) user indicator. true=premium user otherwise is normal user.
         /// </summary>
-        public bool premium { get; set; }
+        [JsonProperty("premium")]
+        public bool Premium { get; set; }
 
-        public bool following { get; set; }
-        public string timezone { get; set; }
-        public int? last_logged_in { get; set; }
-        public int? num_of_followers { get; set; }
+        [JsonProperty("following")]
+        public bool Following { get; set; }
+        [JsonProperty("timezone")]
+        public string Timezone { get; set; }
+        [JsonProperty("last_logged_in")]
+        public int? LastLoggedIn { get; set; }
+        [JsonProperty("num_of_followers")]
+        public int? NoOfFollowers { get; set; }
 
 
-        public enum avatar_size { small, medium, big }
+        public enum AvatarSize { small, medium, big }
 
-        public string avatar_url(avatar_size size)
+        public string AvatarUrl(AvatarSize size)
         {
-            return get_avatar_url(size.ToString());
+            return getAvatarUrl(size.ToString());
         }
-        public string avatar_small { get { return get_avatar_url("small"); } }
-        public string avatar_medium { get { return get_avatar_url("medium"); } }
-        public string avatar_big { get { return get_avatar_url("big"); } }
+
+        public string AvatarSmall { get { return getAvatarUrl("small"); } }
+        public string AvatarMedium { get { return getAvatarUrl("medium"); } }
+        public string AvatarBig { get { return getAvatarUrl("big"); } }
 
 
         /// <summary>
         /// 
         /// </summary>
-        public bool verified_account { get; set; }
-        public int bday_privacy { get; set; }
-        public string default_lang { get; set; }
-        public int dateformat { get; set; }
-        public bool email_confirmed { get; set; }
+        [JsonProperty("verified_account")]
+        public bool VerifiedAccount { get; set; }
+
+        [JsonProperty("bday_privacy")]
+        public int BirthdayPrivacy { get; set; }
+        [JsonProperty("default_lang")]
+        public string DefaultLang { get; set; }
+        [JsonProperty("dateformat")]
+        public int DateFormat { get; set; }
+        [JsonProperty("email_confirmed")]
+        public bool EmailConfirmed { get; set; }
 
         /// <summary>
         /// Color of user name.
         /// </summary>
-        public string name_color { get; set; }
+        [JsonProperty("name_color")]
+        public string NameColor { get; set; }
 
-        private string get_avatar_url(string size)
+        private string getAvatarUrl(string size)
         {
-            if (has_profile_image == 0)
+            if (HasProfileImage == 0)
             {
                 return string.Format("http://www.plurk.com/static/default_{0}.jpg", size);
             }
 
-            var ext = has_profile_image.HasValue && size == "big" ? "jpg" : "gif";
-            if (avatar.HasValue)
+            var ext = HasProfileImage.HasValue && size == "big" ? "jpg" : "gif";
+            if (Avatar.HasValue)
             {
-                return string.Format("http://avatars.plurk.com/{0}-{1}{2}.{3}", id, size, avatar, ext);
+                return string.Format("http://avatars.plurk.com/{0}-{1}{2}.{3}", Id, size, Avatar, ext);
             }
             else
             {
-                return string.Format("http://avatars.plurk.com/{0}-{1}.{2}", id, size, ext);
+                return string.Format("http://avatars.plurk.com/{0}-{1}.{2}", Id, size, ext);
             }
         }
 
         public override string ToString()
         {
-            return display_name ?? (full_name ?? nick_name);
+            return DisplayName ?? (FullName ?? NickName);
         }
     }
 }

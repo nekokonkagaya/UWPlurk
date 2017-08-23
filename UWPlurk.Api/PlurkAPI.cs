@@ -40,7 +40,7 @@ namespace UWPlurk.Api
         /// Returns information about current user, including page-title and user-about. 
         /// </summary>
         /// <returns></returns>
-        public async Task<User> Me()
+        public async Task<User> MyProfile()
         {
             string response = await SendRequest(Constants.APP_USERS + "/me", _HttpMethod, null);
             return CreateEntity<User>(response);
@@ -51,36 +51,36 @@ namespace UWPlurk.Api
         /// Update a user's information (such as display name, email or privacy).
         /// All arguments of the function is optional.
         /// </summary>
-        /// <param name="full_name">Optional, change full name if provided.</param>
+        /// <param name="fullName">Optional, change full name if provided.</param>
         /// <param name="email">Optional, change email if provided.</param>
-        /// <param name="display_name">Optional, change display name if provided. Can be empty and full unicode but must be shorter than 15 characters.</param>
+        /// <param name="displayName">Optional, change display name if provided. Can be empty and full unicode but must be shorter than 15 characters.</param>
         /// <param name="privacy">Optional, User's privacy settings. The option can be world (whole world can view the profile) or only_friends (only friends can view the profile).</param>
-        /// <param name="date_of_birth">Optional, Date of Birth for user.</param>
+        /// <param name="dateOfBirth">Optional, Date of Birth for user.</param>
         /// <returns></returns>
-        public async Task<User> Update(string full_name, string email, string display_name, string privacy, DateTime date_of_birth)
+        public async Task<User> Update(string fullName, string email, string displayName, string privacy, DateTime dateOfBirth)
         {
-            Dictionary<String, string> param = new Dictionary<string, string>();
+            Dictionary<string, string> param = new Dictionary<string, string>();
 
-            if (!string.IsNullOrEmpty(full_name) )
-                param.Add("full_name", full_name);
+            if (!string.IsNullOrEmpty(fullName) )
+                param.Add("full_name", fullName);
 
             if (!string.IsNullOrEmpty(email))
                 param.Add("email", email);
 
-            if (!string.IsNullOrEmpty(display_name))
-                param.Add("display_name", display_name);
+            if (!string.IsNullOrEmpty(displayName))
+                param.Add("display_name", displayName);
 
             if (!string.IsNullOrEmpty(privacy))
                 param.Add("privacy", privacy);
 
-            if (null != date_of_birth)
+            if (null != dateOfBirth)
             {
                 // Process date format to YYYYY-MM-DD
-                var formatDate = String.Format("YYYY-MM-DD", date_of_birth);
+                var formatDate = String.Format("YYYY-MM-DD", dateOfBirth);
                 param.Add("date_of_birth", formatDate);
             }
 
-            string response = await SendRequest(Constants.APP_USERS + "/update", _HttpMethod, param);
+            var response = await SendRequest(Constants.APP_USERS + "/update", _HttpMethod, param);
             return CreateEntity<User>(response);
         }
 
@@ -122,7 +122,7 @@ namespace UWPlurk.Api
         /// This can be used to construct a profile and render a timeline of the latest plurks. 
         /// </summary>
         /// <returns></returns>
-        public async Task<User> getOwnProfile()
+        public async Task<User> GetOwnProfile()
         {
             string response = await SendRequest(Constants.APP_PROFILE + "/getOwnProfile", _HttpMethod, null);
             return CreateEntity<User>(response);
@@ -134,7 +134,7 @@ namespace UWPlurk.Api
         /// </summary>
         /// <param name="user_id">The user_id of the public profile. Can be integer (like 34) or nick name (like amix).</param>
         /// <returns></returns>
-        public async Task<User> getPublicProfile(string user_id)
+        public async Task<User> GetPublicProfile(string user_id)
         {
             string response = await SendRequest(Constants.APP_PROFILE + "/getPublicProfile", _HttpMethod, null);
             return CreateEntity<User>(response);

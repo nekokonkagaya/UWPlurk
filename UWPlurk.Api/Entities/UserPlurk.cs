@@ -15,7 +15,7 @@ namespace UWPlurk.Api.Entities
         {
             return string.Format("[{0}] {1} {2}: {3}",
                 plurk.posted.ToString("yyyy/MM/dd HH:mm:ss"),
-                user.display_name ?? user.nick_name,
+                user.DisplayName ?? user.NickName,
                 plurk.qualifier ?? plurk.qualifier_translated,
                 plurk.content_raw);
         }
